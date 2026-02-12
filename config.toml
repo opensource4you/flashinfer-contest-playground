@@ -1,8 +1,9 @@
 [solution]
 name = "my-team-solution-v1"      # Solution name
-definition = "fused_moe"          # Track: fused_moe | sparse_attention | gated_delta_net
+# Track: moe | dsa_sparse_attention | dsa_topk_indexer | gdn_decode | gdn_prefill
+definition = "moe"          
 author = "team-name"              # Team/author name
 
 [build]
 language = "triton"               # triton | cuda
-entry_point = "kernel"            # Kernel function name
+entry_point = "kernel.py::my_kernel"            # Kernel function name

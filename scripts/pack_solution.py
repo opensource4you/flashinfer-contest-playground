@@ -58,13 +58,25 @@ def pack_solution(output_path: Path = None) -> Path:
         target_hardware=["cuda"],
         entry_point=entry_point,
     )
+    short_definition = solution_config["definition"]
+    match short_definition:
+        case "moe":
+            definition = "moe_fp8_block_scale_ds_routing_topk8_ng8_kg4_e32_h7168_i2048"
+        case "dsa_sparse_attention":
+            definition = "dsa_sparse_attention_h16_ckv512_kpe64_topk2048_ps64"
+        case "dsa_topk_indexer":
+            definition = "dsa_topk_indexer_fp8_h64_d128_topk2048_ps64"
+        case "gdn_decode":
+            definition = "gdn_decode_qk4_v8_d128_k_last"
+        case "gdn_prefill":
+            definition = "gdn_prefill_qk4_v8_d128_k_last"
 
     # Pack the solution
     solution = pack_solution_from_files(
         path=str(source_dir),
         spec=spec,
         name=solution_config["name"],
-        definition=solution_config["definition"],
+        definition=definition,
         author=solution_config["author"],
     )
 
@@ -86,12 +98,15 @@ def main():
     """Entry point for pack_solution script."""
     import argparse
 
-    parser = argparse.ArgumentParser(description="Pack solution files into solution.json")
+    parser = argparse.ArgumentParser(
+        description="Pack solution files into solution.json"
+    )
     parser.add_argument(
-        "-o", "--output",
+        "-o",
+        "--output",
         type=Path,
         default=None,
-        help="Output path for solution.json (default: ./solution.json)"
+        help="Output path for solution.json (default: ./solution.json)",
     )
     args = parser.parse_args()
 
