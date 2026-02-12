@@ -23,7 +23,7 @@ from flashinfer_bench import Benchmark, BenchmarkConfig, Solution, TraceSet
 app = modal.App("flashinfer-bench")
 
 trace_volume = modal.Volume.from_name("flashinfer-trace", create_if_missing=True)
-MOUNT_PATH = "/data"
+MOUNT_PATH = Path("/data")
 TRACE_SET_PATH = Path.joinpath(MOUNT_PATH, "mlsys26-contest")
 
 image = modal.Image.debian_slim(python_version="3.12").pip_install(
