@@ -127,7 +127,7 @@ Edit `solution/cuda/kernel.cu` and `solution/cuda/binding.py` with your implemen
 Generate `solution.json` from your source files:
 
 ```bash
-python scripts/pack_solution.py
+uv run scripts/pack_solution.py
 ```
 
 ### Run Local Benchmarks
@@ -135,7 +135,7 @@ python scripts/pack_solution.py
 Test your solution on your local GPU:
 
 ```bash
-python scripts/run_local.py
+uv run scripts/run_local.py
 ```
 
 Requires: Local CUDA-capable GPU and `FIB_DATASET_PATH` environment variable.
@@ -147,15 +147,15 @@ Test your solution on NVIDIA B200 GPUs via Modal:
 **One-time setup:**
 
 ```bash
-modal setup
-modal volume create flashinfer-trace
-modal volume put flashinfer-trace /path/to/flashinfer-trace
+uv run modal setup
+uv run modal volume create flashinfer-trace
+uv run modal volume put flashinfer-trace /path/to/flashinfer-trace
 ```
 
 **Run benchmark:**
 
 ```bash
-modal run scripts/run_modal.py
+uv run modal run scripts/run_modal.py
 ```
 
 ## Submission
