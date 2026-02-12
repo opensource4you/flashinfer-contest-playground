@@ -38,17 +38,37 @@ The competition features three tracks, each targeting a critical LLM operation:
 
 ## Getting Started
 
-### 1. Fork This Template
-
-Click "Use this template" or fork this repository to create your solution repo.
+### 1. Clone this Repository
+```bash
+git clone https://github.com/opensource4you/flashinfer-contest-playground.git
+cd flashinfer-contest-playground
+```
 
 ### 2. Install Dependencies
+We use [uv](https://docs.astral.sh/uv/) to manage environmnet.
+
+Since the latest version of [flashinfer-bench](https://github.com/flashinfer-ai/flashinfer-bench) isn't not uploaded to pypi, we have to build it from source:
+
+Clone flashinfer-bench from GitHub in this directory:
 
 ```bash
-conda create -n fi-bench python=3.12
-conda activate fi-bench
-pip install flashinfer-bench modal
+git clone https://github.com/flashinfer-ai/flashinfer-bench.git
 ```
+
+Build a virtual environment with uv, and install dependencies:
+
+```bash
+uv venv
+uv sync
+```
+
+You can check whether flashinfer-bench and modal are installed with the `uv pip show`:
+
+```bash
+uv pip show flashinfer-bench  # If you build from source, it should be >=0.1.2
+uv pip show modal
+```
+
 
 ### 3. Download the TraceSet
 
@@ -63,6 +83,17 @@ Set the environment variable:
 
 ```bash
 export FIB_DATASET_PATH=/path/to/flashinfer-trace
+```
+
+Default path if you install TraceSet in this directory:
+
+```bash
+export FIB_DATASET_PATH=$(pwd)/mlsys26-contest
+```
+
+You should be able to see the environment variable `FIB_DATASET_PATH` being updated:
+```bash
+echo $FIB_DATASET_PATH
 ```
 
 ### 4. Configure Your Solution

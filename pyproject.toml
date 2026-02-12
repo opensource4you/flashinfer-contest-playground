@@ -1,0 +1,18 @@
+[project]
+name = "flashinfer-contest-playground"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "flashinfer-bench",
+    "modal>=1.3.2",
+]
+
+[tool.uv.sources]
+flashinfer-bench = { workspace = true }
+
+[tool.uv.workspace]
+members = [
+    "flashinfer-bench",
+]
