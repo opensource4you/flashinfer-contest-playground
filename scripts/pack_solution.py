@@ -46,17 +46,21 @@ def pack_solution(output_path: Path = None) -> Path:
         source_dir = PROJECT_ROOT / "solution" / "triton"
     elif language == "cuda":
         source_dir = PROJECT_ROOT / "solution" / "cuda"
+    elif language == "python":
+        source_dir = PROJECT_ROOT / "solution" / "python"
     else:
         raise ValueError(f"Unsupported language: {language}")
 
     if not source_dir.exists():
         raise FileNotFoundError(f"Source directory not found: {source_dir}")
 
+    dps = build_config.get("destination_passing_style", True)
     # Create build spec
     spec = BuildSpec(
         language=language,
         target_hardware=["cuda"],
         entry_point=entry_point,
+        destination_passing_style=dps,
     )
     short_definition = solution_config["definition"]
     match short_definition:
@@ -70,6 +74,8 @@ def pack_solution(output_path: Path = None) -> Path:
             definition = "gdn_decode_qk4_v8_d128_k_last"
         case "gdn_prefill":
             definition = "gdn_prefill_qk4_v8_d128_k_last"
+        case _:
+            definition = short_definition
 
     # Pack the solution
     solution = pack_solution_from_files(
