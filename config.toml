@@ -5,6 +5,6 @@ definition = "moe"
 author = "team-name"              # Team/author name
 
 [build]
-language = "triton"               # triton | cuda
-entry_point = "kernel.py::my_kernel"            # Kernel function name
+language = "python"               # triton | cuda
+entry_point = "kernel.py::kernel"            # Kernel function name
 destination_passing_style = false

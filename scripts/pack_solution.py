@@ -54,6 +54,9 @@ def pack_solution(output_path: Path = None) -> Path:
     if not source_dir.exists():
         raise FileNotFoundError(f"Source directory not found: {source_dir}")
 
+    # Based on https://github.com/flashinfer-ai/flashinfer-bench-starter-kit?tab=readme-ov-file#destination-passing-style-dps
+    # Setting `destination_passing_style` to true when using "Destination Passing Style" (i.e., instead of writing to pre-allocated ones)
+    # Setting `destination_passing_style` to false when using "Value-returning Passing Style" (i.e., returns output tensors)
     dps = build_config.get("destination_passing_style", True)
     # Create build spec
     spec = BuildSpec(
