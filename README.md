@@ -108,8 +108,9 @@ definition = "moe"
 author = "team-name"              # Team/author name
 
 [build]
-language = "triton"               # triton | cuda
-entry_point = "kernel.py::my_kernel"            # Path::Function
+language = "python"               # triton | cuda | python
+entry_point = "kernel.py::kernel"            # Kernel function name
+destination_passing_style = false
 ```
 
 ### 5. Implement Your Kernel
@@ -119,6 +120,10 @@ Edit `solution/triton/kernel.py` with your implementation.
 
 **For CUDA:**
 Edit `solution/cuda/kernel.cu` and `solution/cuda/binding.py` with your implementation.
+
+**For PyTorch:**
+Edit `solution/python/kernel.py` with your implementation.
+And set `destination_passing_style = false`.
 
 ## Development Workflow
 
